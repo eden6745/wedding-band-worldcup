@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>웨딩밴드 이상형 월드컵</title>
+<style>
+  :root {
+    --bg: #faf7f0;
+    --ink: #2b2620;
+    --sub: #7a6f5e;
+    --accent: #b08d43;
+    --accent-soft: #d9c69a;
+    --card: #ffffff;
+    --line: #e5dccb;
+    --shadow: 0 10px 30px rgba(90, 72, 40, .10);
+    --shadow-hover: 0 16px 40px rgba(90, 72, 40, .18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1613;
+      --ink: #ece5da;
+      --sub: #a39682;
+      --accent: #d6b36c;
+      --accent-soft: #6b5836;
+      --card: #241f1a;
+      --line: #3a332a;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+      --shadow-hover: 0 16px 40px rgba(0, 0, 0, .5);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #faf7f0; --ink: #2b2620; --sub: #7a6f5e; --accent: #b08d43;
+    --accent-soft: #d9c69a; --card: #ffffff; --line: #e5dccb;
+    --shadow: 0 10px 30px rgba(90, 72, 40, .10);
+    --shadow-hover: 0 16px 40px rgba(90, 72, 40, .18);
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a1613; --ink: #ece5da; --sub: #a39682; --accent: #d6b36c;
+    --accent-soft: #6b5836; --card: #241f1a; --line: #3a332a;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    --shadow-hover: 0 16px 40px rgba(0, 0, 0, .5);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .serif { font-family: "Nanum Myeongjo", "Noto Serif KR", "AppleMyungjo", Georgia, serif; }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  .eyebrow {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: .35em;
+    font-size: 11px;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .greeting {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 6px;
+    letter-spacing: .02em;
+  }
+  h1 {
+    font-family: "Nanum Myeongjo", "Noto Serif KR", "AppleMyungjo", Georgia, serif;
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 44px);
+    text-align: center;
+    margin: 0 0 10px;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+  }
+  .lede { text-align: center; color: var(--sub); max-width: 36em; margin: 0 auto 30px; font-size: 15px; }
+
+  .btn {
+    display: inline-block;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 999px;
+    padding: 14px 40px;
+    cursor: pointer;
+    letter-spacing: .05em;
+    transition: transform .15s ease, box-shadow .15s ease;
+    box-shadow: var(--shadow);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .btn:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
+  .btn.ghost {
+    background: transparent; color: var(--accent);
+    border: 1.5px solid var(--accent);
+    box-shadow: none;
+  }
+  .btn.sm { font-size: 13px; padding: 8px 20px; }
+
+  /* ---------- intro ---------- */
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 12px;
+    margin: 0 auto 36px;
+    max-width: 820px;
+  }
+  .preview-grid figure {
+    margin: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 10px 6px 8px;
+    text-align: center;
+  }
+  .preview-grid svg { width: 100%; height: auto; display: block; }
+  .preview-grid figcaption { font-size: 10.5px; color: var(--sub); margin-top: 4px; letter-spacing: -.02em; }
+  .center { text-align: center; }
+  .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ---------- match ---------- */
+  .round-head { text-align: center; margin-bottom: 8px; }
+  .round-title {
+    font-family: "Nanum Myeongjo", "Noto Serif KR", Georgia, serif;
+    font-size: 26px; font-weight: 800; letter-spacing: .04em;
+  }
+  .round-sub { color: var(--sub); font-size: 13px; }
+  .progress {
+    height: 3px; background: var(--line); border-radius: 2px;
+    max-width: 320px; margin: 14px auto 30px; overflow: hidden;
+  }
+  .progress i { display: block; height: 100%; background: var(--accent); border-radius: 2px; transition: width .4s ease; }
+
+  .arena {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .vs {
+    align-self: center;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--accent);
+    padding: 0 4px;
+    user-select: none;
+  }
+  .ring-card {
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 24px 18px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .ring-card:hover, .ring-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-hover);
+    outline: none;
+  }
+  .ring-card.picked { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-hover); }
+  .ring-card.dimmed { opacity: .25; transform: scale(.96); pointer-events: none; }
+  .ring-card svg { width: min(210px, 60vw); height: auto; margin-bottom: 8px; }
+  .ring-name {
+    font-family: "Nanum Myeongjo", "Noto Serif KR", Georgia, serif;
+    font-size: 19px; font-weight: 800; letter-spacing: -.01em;
+  }
+  .ring-meta { font-size: 12px; color: var(--accent); letter-spacing: .06em; }
+  .ring-desc { font-size: 13px; color: var(--sub); max-width: 26em; }
+  .ring-facts { font-size: 12px; color: var(--sub); max-width: 26em; margin-top: 6px; text-align: left; }
+  .ring-facts div { display: flex; gap: 6px; margin-top: 2px; }
+  .ring-facts b { color: var(--accent); font-weight: 700; flex: none; }
+  .hint { text-align: center; color: var(--sub); font-size: 12px; margin-top: 24px; }
+
+  /* ---------- result ---------- */
+  .champion {
+    background: var(--card);
+    border: 1.5px solid var(--accent);
+    border-radius: 24px;
+    padding: 36px 24px 30px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-bottom: 26px;
+  }
+  .champion svg { width: min(280px, 72vw); height: auto; }
+  .champion .ring-name { font-size: 28px; margin-top: 6px; }
+  .champion .ring-desc { margin: 6px auto 0; }
+  .champion .ring-facts { margin: 10px auto 0; max-width: 30em; }
+  .laurel {
+    font-family: Georgia, serif; text-transform: uppercase;
+    letter-spacing: .4em; font-size: 11px; color: var(--accent); margin-bottom: 10px;
+  }
+  .podium {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px; margin-bottom: 26px;
+  }
+  .podium .slot {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 14px 10px; text-align: center;
+  }
+  .podium svg { width: 96px; height: auto; }
+  .podium .rank { font-size: 11px; color: var(--accent); letter-spacing: .2em; text-transform: uppercase; font-family: Georgia, serif; margin: 0; }
+  .podium .nm { font-size: 13.5px; font-weight: 700; margin-top: 2px; }
+
+  .section-title {
+    font-family: "Nanum Myeongjo", "Noto Serif KR", Georgia, serif;
+    font-size: 20px; font-weight: 800; margin: 34px 0 6px;
+  }
+  .section-sub { color: var(--sub); font-size: 13px; margin: 0 0 16px; }
+
+  .combo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 10px; }
+  .combo {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 20px 18px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .combo svg { width: 170px; height: auto; }
+  .combo .tag {
+    font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+    font-family: Georgia, serif; color: var(--accent); margin-bottom: 2px;
+  }
+  .combo .nm { font-family: "Nanum Myeongjo", "Noto Serif KR", Georgia, serif; font-size: 16px; font-weight: 800; }
+  .combo .spec { font-size: 12px; color: var(--sub); margin-top: 4px; text-align: left; }
+  .combo .spec div { display: flex; gap: 6px; margin-top: 2px; }
+  .combo .spec b { color: var(--accent); font-weight: 700; flex: none; }
+  .combo .why { font-size: 12px; color: var(--sub); margin-top: 8px; font-style: normal; border-top: 1px dashed var(--line); padding-top: 8px; }
+
+  .taste {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 22px 24px; margin-bottom: 28px;
+  }
+  .taste h2 {
+    font-family: "Nanum Myeongjo", "Noto Serif KR", Georgia, serif;
+    font-size: 18px; margin: 0 0 14px;
+  }
+  .bar-row { display: grid; grid-template-columns: 120px 1fr 44px; align-items: center; gap: 10px; margin-bottom: 9px; font-size: 13px; }
+  .bar-row .lbl { color: var(--sub); }
+  .bar-row .val { text-align: right; font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 700; }
+  .bar { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+  .taste p.note { font-size: 13px; color: var(--sub); margin: 14px 0 0; }
+
+  /* ---------- builder ---------- */
+  .builder {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    padding: 26px; align-items: start;
+  }
+  .builder-preview { text-align: center; position: sticky; top: 20px; }
+  .builder-preview svg { width: min(280px, 70vw); height: auto; }
+  .builder-name { font-family: "Nanum Myeongjo", "Noto Serif KR", Georgia, serif; font-size: 18px; font-weight: 800; margin-top: 8px; }
+  .builder-spec { font-size: 13px; color: var(--accent); margin-top: 2px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; color: var(--sub); letter-spacing: .06em; margin-bottom: 4px; }
+  .field select, .field input[type=range] {
+    width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
+    background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px;
+  }
+  .field input[type=range] { padding: 0; accent-color: var(--accent); height: 28px; border: none; background: transparent; }
+  .field .range-val { font-size: 12px; color: var(--accent); font-weight: 700; }
+  .field select:focus, .field input:focus { outline: 2px solid var(--accent-soft); }
+  .order-note {
+    font-size: 13px; color: var(--sub); background: var(--bg);
+    border: 1px dashed var(--line); border-radius: 12px; padding: 12px 14px; margin-top: 6px;
+  }
+  .order-note b { color: var(--ink); }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .topbar .back { background: none; border: none; color: var(--accent); font-family: inherit; font-size: 14px; cursor: pointer; padding: 4px 0; }
+
+  .fade-in { animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in { animation: none; }
+    .btn, .ring-card { transition: none; }
+  }
+  @media (max-width: 640px) {
+    .arena { grid-template-columns: 1fr; }
+    .vs { padding: 2px 0; }
+    .ring-card svg { width: min(160px, 52vw); }
+    .builder { grid-template-columns: 1fr; }
+    .builder-preview { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app"></div>
+
+<script>
+"use strict";
+
+/* ---------------- metals ---------------- */
+
+const METALS = {
+  yellow:   { hi: "#f6e3a8", mid: "#e0b95f", lo: "#a97f2e", label: "옐로우 골드" },
+  rose:     { hi: "#f7d3c0", mid: "#e2a184", lo: "#b06a4e", label: "로즈 골드" },
+  white:    { hi: "#f4f4f6", mid: "#cfd0d6", lo: "#8e8f99", label: "화이트 골드" },
+  platinum: { hi: "#eef0f2", mid: "#c3c8cd", lo: "#7f858c", label: "플래티넘" },
+  titanium: { hi: "#c6cbd1", mid: "#8b9198", lo: "#4e545b", label: "티타늄" },
+  black:    { hi: "#6a6d72", mid: "#3a3d42", lo: "#141518", label: "블랙 로듐" },
+};
+
+/* ---------------- 3D ring renderer ----------------
+   tilted torus: tube swept along an ellipse, painter's algorithm,
+   per-segment metal shading (light from top-left) + texture pass  */
+
+function hexMix(a, b, t) {
+  const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+  const ch = (sh) => Math.round(((pa >> sh) & 255) + (((pb >> sh) & 255) - ((pa >> sh) & 255)) * t);
+  return "#" + ((ch(16) << 16) | (ch(8) << 8) | ch(0)).toString(16).padStart(6, "0");
+}
+function shade(m, lum) {
+  lum = Math.max(0, Math.min(1, lum));
+  return lum < 0.5 ? hexMix(m.lo, m.mid, lum * 2) : hexMix(m.mid, m.hi, (lum - 0.5) * 2);
+}
+
+function ringSVG(d, size) {
+  const m = METALS[d.metal];
+  const T = d.tex || [];
+  const has = (x) => T.includes(x);
+  const cx = 100, cy = 96, rx = 64, ry = 30;
+  const tube = Math.max(5, d.width * 0.42);
+  const sq = ry / rx;
+  const N = 120;
+  const Lx = -0.55, Ly = -0.83;
+  const matte = d.finish === "matte";
+
+  // point on the band: t = sweep angle, k = radial offset from centerline
+  // lift pulls texture points up onto the visible top face of the tube
+  const P = (t, k = 0, lift = 0.48) => {
+    const ct = Math.cos(t), st = Math.sin(t);
+    const persp = 0.8 + 0.2 * (st + 1) / 2;
+    return {
+      x: cx + (rx + k) * ct,
+      y: cy + (ry + k * sq) * st - tube * lift * st * persp,
+      ct, st, persp,
+      tang: Math.atan2(ry * ct, -rx * st) * 180 / Math.PI,
+    };
+  };
+
+  const segs = [];
+  function sweep(erx, ery, tb, metal, opts = {}) {
+    for (let i = 0; i < N; i++) {
+      const t = i / N * Math.PI * 2;
+      const ct = Math.cos(t), st = Math.sin(t);
+      const x = cx + erx * ct, y = cy + ery * st;
+      const persp = 0.8 + 0.2 * (st + 1) / 2;
+      const r = tb * persp;
+      let lum = 0.56 + 0.42 * (ct * Lx + st * Ly);
+      lum *= 0.78 + 0.22 * (st + 1) / 2;
+      if (opts.matte) lum = 0.5 + (lum - 0.5) * 0.5;
+      let col = shade(metal, lum);
+      if (!opts.matte && lum > 0.86) col = hexMix(col, "#ffffff", Math.min(1, (lum - 0.86) * 5));
+      segs.push({ z: st + (opts.zBias || 0), s: '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + r.toFixed(2) + '" fill="' + col + '"/>' });
+    }
+  }
+
+  sweep(rx, ry, tube, m, { matte });
+  if (has("twotone")) {
+    const k = -tube * 0.55;
+    sweep(rx + k, ry + k * sq, tube * 0.5, METALS[d.metal2 || "yellow"], { zBias: 3 });
+  }
+  if (has("trinity")) {
+    const ki = -tube * 0.55, ko = tube * 0.55;
+    sweep(rx + ki, ry + ki * sq, tube * 0.42, METALS.yellow, { zBias: 3 });
+    sweep(rx + ko, ry + ko * sq, tube * 0.42, METALS.rose, { zBias: 3.01 });
+  }
+  if (has("brushcenter")) {
+    sweep(rx, ry, tube * 0.52, m, { matte: true, zBias: 3 });
+  }
+  segs.sort((a, b) => a.z - b.z);
+
+  /* ---- texture pass: drawn on the visible front half ---- */
+  const tex = [];
+  const FRONT_A = Math.PI * 0.06, FRONT_B = Math.PI * 0.94;
+  const frontT = (u) => FRONT_A + (FRONT_B - FRONT_A) * u;
+  const line = (p1, p2, col, w, op) =>
+    '<line x1="' + p1.x.toFixed(1) + '" y1="' + p1.y.toFixed(1) + '" x2="' + p2.x.toFixed(1) + '" y2="' + p2.y.toFixed(1) +
+    '" stroke="' + col + '" stroke-width="' + w + '" opacity="' + op + '" stroke-linecap="round"/>';
+  const poly = (pts, col, w, op) =>
+    '<polyline points="' + pts.join(" ") + '" fill="none" stroke="' + col + '" stroke-width="' + w + '" opacity="' + op + '" stroke-linecap="round"/>';
+
+  function stoneRow(u0, u1, count, stoneFill, facetFill) {
+    for (let i = 0; i < count; i++) {
+      const p = P(frontT(u0 + (u1 - u0) * i / (count - 1)));
+      const r = tube * 0.42 * p.persp;
+      tex.push(
+        '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + (r * 1.25).toFixed(2) + '" fill="' + m.lo + '"/>' +
+        '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + r.toFixed(2) + '" fill="' + stoneFill + '"/>' +
+        '<circle cx="' + (p.x - r * 0.3).toFixed(1) + '" cy="' + (p.y - r * 0.3).toFixed(1) + '" r="' + (r * 0.32).toFixed(2) + '" fill="' + facetFill + '"/>'
+      );
+    }
+  }
+  function bigStone(stoneFill, facetFill) {
+    const p = P(Math.PI / 2);
+    const r = tube * 0.62;
+    tex.push(
+      '<circle cx="' + p.x + '" cy="' + p.y.toFixed(1) + '" r="' + (r * 1.3).toFixed(2) + '" fill="' + m.lo + '"/>' +
+      '<circle cx="' + p.x + '" cy="' + p.y.toFixed(1) + '" r="' + r.toFixed(2) + '" fill="' + stoneFill + '"/>' +
+      '<path d="M' + p.x + ' ' + (p.y - r).toFixed(1) + 'L' + (p.x + r).toFixed(1) + ' ' + p.y.toFixed(1) +
+        'L' + p.x + ' ' + (p.y + r).toFixed(1) + 'L' + (p.x - r).toFixed(1) + ' ' + p.y.toFixed(1) + 'z" fill="' + facetFill + '"/>' +
+      '<circle cx="' + (p.x - r * 0.3).toFixed(1) + '" cy="' + (p.y - r * 0.35).toFixed(1) + '" r="' + (r * 0.3).toFixed(2) + '" fill="#ffffff"/>'
+    );
+  }
+  function grooveLine(kBase, waveAmp, waveFreq) {
+    const pts = [], pts2 = [];
+    for (let i = 0; i <= 60; i++) {
+      const t = frontT(i / 60);
+      const k = kBase + (waveAmp ? Math.sin(t * waveFreq) * waveAmp : 0);
+      const p = P(t, k), ph = P(t, k - 1.5);
+      pts.push(p.x.toFixed(1) + "," + p.y.toFixed(1));
+      pts2.push(ph.x.toFixed(1) + "," + ph.y.toFixed(1));
+    }
+    tex.push(poly(pts, m.lo, 2.2, .85));
+    tex.push(poly(pts2, m.hi, .9, .9));
+  }
+
+  if (has("milgrain")) {
+    for (const k of [tube * 0.72, -tube * 0.72]) {
+      for (let i = 0; i <= 26; i++) {
+        const p = P(frontT(i / 26), k);
+        tex.push('<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + (1.25 * p.persp).toFixed(2) +
+          '" fill="' + m.hi + '" stroke="' + m.lo + '" stroke-width=".35"/>');
+      }
+    }
+  }
+
+  if (has("coinedge")) {
+    for (const sgn of [1, -1]) {
+      for (let i = 0; i <= 40; i++) {
+        const t = frontT(i / 40);
+        tex.push(line(P(t, sgn * tube * 0.5), P(t, sgn * tube * 0.82), m.lo, 1.1, .6));
+      }
+    }
+  }
+
+  if (has("twist")) {
+    for (let i = 0; i < 22; i++) {
+      const t1 = FRONT_A + (FRONT_B - FRONT_A - 0.15) * i / 21, t2 = t1 + 0.1;
+      tex.push(line(P(t1, -tube * 0.62), P(t2, tube * 0.62), m.lo, 2.4, .5));
+      tex.push(line(P(t1 + 0.035, -tube * 0.62), P(t2 + 0.035, tube * 0.62), m.hi, 1.1, .8));
+    }
+  }
+
+  if (has("facet")) {
+    for (let i = 0; i < 26; i++) {
+      const t1 = FRONT_A + (FRONT_B - FRONT_A - 0.13) * i / 25, t2 = t1 + 0.09;
+      tex.push(line(P(t1, -tube * 0.7), P(t2, tube * 0.7), i % 2 ? m.hi : m.lo, 3.2, .45));
+    }
+  }
+
+  if (has("pave")) stoneRow(0.3, 0.7, 9, "#f2f6fa", "#ffffff");
+  if (has("pavefull")) stoneRow(0.05, 0.95, 16, "#f2f6fa", "#ffffff");
+
+  if (has("channel")) {
+    grooveLine(tube * 0.4, 0, 0);
+    grooveLine(-tube * 0.4, 0, 0);
+    for (let i = 0; i < 8; i++) {
+      const p = P(frontT(0.32 + 0.36 * i / 7));
+      const s = tube * 0.34 * p.persp;
+      tex.push(
+        '<g transform="translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + p.tang.toFixed(1) + ')">' +
+        '<rect x="' + (-s * 1.1).toFixed(1) + '" y="' + (-s).toFixed(1) + '" width="' + (s * 2.2).toFixed(1) + '" height="' + (s * 2).toFixed(1) + '" fill="#f2f6fa" stroke="' + m.lo + '" stroke-width=".5"/>' +
+        '<rect x="' + (-s * 0.5).toFixed(1) + '" y="' + (-s * 0.5).toFixed(1) + '" width="' + s.toFixed(1) + '" height="' + s.toFixed(1) + '" fill="#ffffff"/>' +
+        '</g>'
+      );
+    }
+  }
+
+  if (has("solitaire")) bigStone("#f2f6fa", "#dfe8f0");
+  if (has("sapphire")) bigStone("#4a6fd4", "#2c4fa3");
+
+  if (has("hammered")) {
+    let seed = 7;
+    const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    for (let i = 0; i < 70; i++) {
+      const p = P(frontT(rnd()), (rnd() * 2 - 1) * tube * 0.62);
+      const s = (1.4 + rnd() * 2.1) * p.persp;
+      tex.push('<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + s.toFixed(2) +
+        '" fill="' + (rnd() > .5 ? m.hi : m.lo) + '" opacity=".33"/>');
+    }
+  }
+
+  if (has("stardust")) {
+    let seed = 21;
+    const rnd = () => { seed = (seed * 48271) % 2147483647; return seed / 2147483647; };
+    for (let i = 0; i < 110; i++) {
+      const p = P(frontT(rnd()), (rnd() * 2 - 1) * tube * 0.72);
+      tex.push('<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + (0.4 + rnd() * 0.7).toFixed(2) +
+        '" fill="#ffffff" opacity="' + (0.3 + rnd() * 0.6).toFixed(2) + '"/>');
+    }
+  }
+
+  if (has("hairline")) {
+    let seed = 33;
+    const rnd = () => { seed = (seed * 69621) % 2147483647; return seed / 2147483647; };
+    for (let i = 0; i < 70; i++) {
+      const t = frontT(rnd());
+      const k = (rnd() * 2 - 1) * tube * 0.7;
+      tex.push(line(P(t - 0.03, k), P(t + 0.03, k), rnd() > .5 ? m.hi : m.lo, .6, .4));
+    }
+  }
+
+  if (has("groove")) grooveLine(0, 0, 0);
+  if (has("groove2")) { grooveLine(tube * 0.3, 0, 0); grooveLine(-tube * 0.3, 0, 0); }
+  if (has("wave")) grooveLine(0, tube * 0.32, 4);
+
+  if (has("knife")) {
+    const pts = [];
+    for (let i = 0; i <= 60; i++) {
+      const p = P(frontT(i / 60), 0, 0.85);
+      pts.push(p.x.toFixed(1) + "," + p.y.toFixed(1));
+    }
+    tex.push(poly(pts, "#ffffff", 1.8, .85));
+  }
+
+  if (has("mokume")) {
+    const m2 = METALS[d.metal2 || "white"];
+    for (let j = 0; j < 4; j++) {
+      const pts = [];
+      const kb = (j - 1.5) * tube * 0.34;
+      for (let i = 0; i <= 60; i++) {
+        const t = frontT(i / 60);
+        const k = kb + Math.sin(t * 3 + j * 1.7) * tube * 0.22;
+        const p = P(t, k);
+        pts.push(p.x.toFixed(1) + "," + p.y.toFixed(1));
+      }
+      tex.push(poly(pts, j % 2 ? m2.mid : m.lo, 1.4, .55));
+    }
+  }
+
+  if (has("leaf")) {
+    for (let i = 0; i < 11; i++) {
+      const p = P(frontT(0.045 + 0.91 * i / 10));
+      tex.push(
+        '<g transform="translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + p.tang.toFixed(1) + ') scale(' + p.persp.toFixed(2) + ')">' +
+        '<path d="M-4.2 0C-1.6 -2.8 1.6 -2.8 4.2 0C1.6 2.8 -1.6 2.8 -4.2 0z" fill="none" stroke="' + m.lo + '" stroke-width="1.1" opacity=".85"/>' +
+        '<line x1="-3.2" y1="0" x2="3.2" y2="0" stroke="' + m.lo + '" stroke-width=".6" opacity=".6"/>' +
+        '</g>'
+      );
+    }
+  }
+
+  if (has("star")) {
+    for (let i = 0; i < 9; i++) {
+      const p = P(frontT(0.06 + 0.88 * i / 8));
+      const s = p.persp;
+      tex.push(
+        '<g transform="translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + p.tang.toFixed(1) + ') scale(' + s.toFixed(2) + ')">' +
+        '<path d="M0 -3.4L0.9 -0.9L3.4 0L0.9 0.9L0 3.4L-0.9 0.9L-3.4 0L-0.9 -0.9z" fill="' + m.hi + '" stroke="' + m.lo + '" stroke-width=".4"/>' +
+        '</g>'
+      );
+    }
+  }
+
+  if (has("brushcenter")) {
+    for (let i = 0; i < 50; i++) {
+      const t = frontT(i / 50);
+      tex.push(line(P(t - 0.025), P(t + 0.025), m.lo, .5, .35));
+    }
+  }
+
+  let body = '<ellipse cx="100" cy="' + (cy + ry + tube + 7).toFixed(1) + '" rx="' + (rx * 0.92).toFixed(1) + '" ry="6.5" fill="#000" opacity=".14"/>';
+  body += segs.map(s => s.s).join("");
+  body += tex.join("");
+
+  return '<svg viewBox="0 40 200 116" width="' + size + '" height="' + Math.round(size * 0.58) + '" role="img" aria-label="' + (d.name || "반지") + '">' + body + '</svg>';
+}
+
+/* ---------------- 32 designs ---------------- */
+
+const DESIGNS = [
+  { id: "dome",       name: "클래식 돔",           metal: "yellow",   width: 22, finish: "polish", tex: [],              mm: "3.0mm",
+    desc: "가장 오래 사랑받는 둥근 단면의 정석 밴드.",
+    fit: "어떤 손 모양에도 무난. 평생 질리지 않는 첫 반지의 기준.",
+    care: "유광은 잔기스가 생기지만 광택 재작업으로 새것처럼 복원 가능." },
+  { id: "flatmatte",  name: "플랫 무광",           metal: "platinum", width: 24, finish: "matte",  tex: [],              mm: "3.5mm",
+    desc: "각진 단면에 샌딩 무광 마감. 미니멀하고 단단한 인상.",
+    fit: "모던·미니멀 취향, 남녀 공용. 정장·캐주얼 모두 어울림.",
+    care: "기스가 잘 안 보이는 대신, 광이 나기 시작하면 무광 재가공 필요." },
+  { id: "milgrain",   name: "밀그레인 클래식",     metal: "white",    width: 22, finish: "polish", tex: ["milgrain"],    mm: "3.0mm",
+    desc: "가장자리에 좁쌀 세공을 촘촘히 둘러 앤티크한 분위기.",
+    fit: "빈티지·클래식 무드. 셔츠나 니트 같은 단정한 차림과 찰떡.",
+    care: "홈 사이에 이물질이 끼기 쉬워 초음파 세척을 반년에 한 번 권장." },
+  { id: "twist",      name: "트위스트 로프",       metal: "yellow",   width: 20, finish: "polish", tex: ["twist"],       mm: "2.5mm",
+    desc: "두 가닥을 꼬아 만든 밧줄 형태. '엮인 인연'의 의미.",
+    fit: "손가락이 가늘어 보이는 효과. 스토리 있는 디자인을 원할 때.",
+    care: "골 사이 세척만 신경 쓰면 변형 걱정은 적은 편." },
+  { id: "pave",       name: "하프 이터니티",       metal: "white",    width: 20, finish: "polish", tex: ["pave"],        mm: "2.5mm",
+    desc: "윗면 절반에 다이아를 촘촘히. 화려함과 일상성의 균형.",
+    fit: "반짝임은 원하지만 풀 세팅은 부담스러울 때 최적.",
+    care: "스톤 유격 점검을 1년에 한 번. 사이즈 수선도 가능한 구조." },
+  { id: "twotone",    name: "투톤 콤비",           metal: "white",    metal2: "yellow", width: 26, finish: "polish", tex: ["twotone"], mm: "4.0mm",
+    desc: "화이트+옐로우 두 금속을 겹친 레이어드 밴드.",
+    fit: "커플이 서로 반대 배색으로 맞추면 세트감이 살아남.",
+    care: "같은 함량 골드끼리 접합이라 경계면 변색 걱정 없음." },
+  { id: "hammer",     name: "해머드 텍스처",       metal: "yellow",   width: 24, finish: "polish", tex: ["hammered"],    mm: "3.5mm",
+    desc: "망치로 두드린 유기적인 요철. 세상에 하나뿐인 표면.",
+    fit: "크래프트·수공예 감성. 생활 기스가 텍스처에 자연스럽게 묻힘.",
+    care: "사실상 관리 걱정이 가장 적은 표면. 기스가 나도 티가 안 남." },
+  { id: "brush",      name: "브러시드 센터",       metal: "platinum", width: 26, finish: "polish", tex: ["brushcenter"], mm: "4.0mm",
+    desc: "가운데는 헤어라인 무광, 양끝은 유광 라인.",
+    fit: "남성 밴드 스테디셀러. 두 마감의 대비가 은근한 포인트.",
+    care: "무광 면이 반질해지면 브러시 재가공(공방에서 수 분 소요)." },
+  { id: "wave",       name: "웨이브 라인",         metal: "rose",     width: 22, finish: "polish", tex: ["wave"],        mm: "3.0mm",
+    desc: "물결 곡선이 흐르는 밴드. 부드럽고 로맨틱한 무드.",
+    fit: "곡선적인 디자인을 좋아하는 취향. 로즈골드와 특히 잘 맞음.",
+    care: "각인 라인이 얕아지면 리터칭 가능." },
+  { id: "groove",     name: "센터 그루브",         metal: "white",    width: 24, finish: "polish", tex: ["groove"],      mm: "3.5mm",
+    desc: "중앙에 가느다란 홈 한 줄. 절제된 디테일의 모던함.",
+    fit: "심플한데 밋밋하진 않은 것을 찾을 때 정답.",
+    care: "홈 안쪽만 가끔 부드러운 솔로 세척." },
+  { id: "solitaire",  name: "원 포인트 다이아",    metal: "rose",     width: 20, finish: "polish", tex: ["solitaire"],   mm: "2.5mm",
+    desc: "다이아 딱 한 알을 심플하게 박아 은은한 포인트.",
+    fit: "약혼반지 겸용으로도 인기. 매일 끼기 부담 없는 반짝임.",
+    care: "스톤이 낮게 세팅돼 걸림이 적고 유격 점검만 하면 됨." },
+  { id: "slim",       name: "슬림 스태킹",         metal: "rose",     width: 12, finish: "polish", tex: [],              mm: "1.5mm",
+    desc: "1.5mm대 얇은 밴드. 가볍고 존재감은 은은하게.",
+    fit: "가녀린 손, 반지를 여러 개 겹쳐 끼우는 스타일링용 베이스.",
+    care: "얇은 만큼 강한 악력 작업(헬스 등)에는 빼두는 게 안전." },
+  { id: "wide",       name: "와이드 볼드",         metal: "yellow",   width: 32, finish: "polish", tex: [],              mm: "5.5mm",
+    desc: "5mm 이상의 존재감. 반지 하나로 스타일이 완성됨.",
+    fit: "손가락이 굵거나 볼드 주얼리를 즐기는 취향.",
+    care: "면적이 넓어 기스가 보일 수 있으니 무광 변경 옵션도 고려." },
+  { id: "leaf",       name: "보태니컬 인그레이빙", metal: "white",    width: 24, finish: "polish", tex: ["leaf"],        mm: "3.5mm",
+    desc: "잎사귀 문양을 손각자로 새긴 자연주의 밴드.",
+    fit: "내추럴·보태니컬 감성. 야외 웨딩·스몰 웨딩과 무드가 맞음.",
+    care: "각인이 마모되면 재각인 가능. 수작업이라 무늬가 조금씩 다름." },
+  { id: "stardust",   name: "스타더스트",          metal: "platinum", width: 24, finish: "matte",  tex: ["stardust"],    mm: "3.5mm",
+    desc: "다이아 커터로 표면을 쪼아 별가루처럼 반짝이는 마감.",
+    fit: "무광의 차분함 + 은은한 반짝임을 동시에 원할 때.",
+    care: "마모되면 반짝임이 줄어드는데, 재타공으로 복원 가능." },
+  { id: "blackm",     name: "블랙 모던",           metal: "black",    width: 24, finish: "matte",  tex: [],              mm: "3.5mm",
+    desc: "블랙 로듐 코팅의 시크한 밴드.",
+    fit: "유니크·모던 취향, 남성 밴드로 특히 인기.",
+    care: "블랙 로듐은 도금이라 2~3년 주기로 재도금이 필요함." },
+  { id: "fullpave",   name: "풀 이터니티",         metal: "white",    width: 20, finish: "polish", tex: ["pavefull"],    mm: "2.5mm",
+    desc: "한 바퀴 전체에 다이아를 두른 최상급 반짝임.",
+    fit: "결혼반지+기념일 반지를 하나로. 화려함의 끝판.",
+    care: "전체 스톤 세팅이라 사이즈 수선이 어려움 — 호수를 신중히." },
+  { id: "channel",    name: "채널 세팅",           metal: "yellow",   width: 26, finish: "polish", tex: ["channel"],     mm: "4.0mm",
+    desc: "홈 안에 사각 다이아를 나란히 심은 세팅.",
+    fit: "화려하지만 스톤이 튀어나오지 않아 실용적. 장갑도 걸림 없음.",
+    care: "스톤이 레일 안에 보호돼 일상 관리가 가장 편한 다이아 세팅." },
+  { id: "sapphire",   name: "사파이어 포인트",     metal: "platinum", width: 22, finish: "polish", tex: ["sapphire"],    mm: "3.0mm",
+    desc: "블루 사파이어 한 알 — '섬씽 블루'의 행운 의미.",
+    fit: "남들과 다른 포인트 컬러. 탄생석·의미 부여를 좋아한다면.",
+    care: "사파이어는 경도 9로 다이아 다음으로 단단해 데일리 착용 OK." },
+  { id: "trinity",    name: "트리니티 쓰리톤",     metal: "white",    width: 26, finish: "polish", tex: ["trinity"],     mm: "4.0mm",
+    desc: "화이트·옐로우·로즈 세 가지 골드를 한 밴드에.",
+    fit: "우정·사랑·충실의 세 가지 의미. 어떤 색 주얼리와도 매치됨.",
+    care: "세 금속의 색 차이가 세월이 지나도 유지되는 게 장점." },
+  { id: "knife",      name: "나이프 엣지",         metal: "white",    width: 22, finish: "polish", tex: ["knife"],       mm: "3.0mm",
+    desc: "중앙이 산처럼 솟은 능선 단면. 빛 각도마다 날카로운 반짝임.",
+    fit: "심플하지만 각도에 따라 표정이 바뀌는 디자인을 원할 때.",
+    care: "능선 부분 기스는 광택 재작업으로 복원." },
+  { id: "coinedge",   name: "코인 엣지",           metal: "yellow",   width: 24, finish: "polish", tex: ["coinedge"],    mm: "3.5mm",
+    desc: "동전 테두리 같은 밀링 세공을 양 가장자리에.",
+    fit: "클래식 시계 베젤 감성. 빈티지+남성적인 무드.",
+    care: "테두리 홈 세척만 가끔. 마모에 강한 편." },
+  { id: "mokume",     name: "모쿠메가네",          metal: "rose",     metal2: "white", width: 26, finish: "polish", tex: ["mokume"], mm: "4.0mm",
+    desc: "두 금속을 접어 만든 나뭇결 무늬 — 일본 전통 금속공예.",
+    fit: "세상에 같은 결이 두 개 없는 진짜 '커스텀'을 원한다면.",
+    care: "통금속 무늬라 벗겨질 걱정 없음. 제작 기간이 긴 편(3~4주+)." },
+  { id: "star",       name: "스타 인그레이빙",     metal: "platinum", width: 24, finish: "polish", tex: ["star"],        mm: "3.5mm",
+    desc: "밴드를 따라 작은 별을 새긴 밤하늘 컨셉.",
+    fit: "'우리가 만난 날의 별자리' 같은 스토리텔링이 가능.",
+    care: "별 사이 간격·개수를 기념일 숫자로 커스텀하기 좋음." },
+  { id: "facet",      name: "다이아컷 패싯",       metal: "yellow",   width: 24, finish: "polish", tex: ["facet"],       mm: "3.5mm",
+    desc: "표면을 다이아몬드처럼 깎아 칼각 반짝임을 만든 밴드.",
+    fit: "스톤 없이도 화려한 반짝임을 원할 때. 조명 아래서 존재감 큼.",
+    care: "패싯 각이 무뎌지면 재컷팅으로 복원 가능." },
+  { id: "satinslim",  name: "새틴 슬림",           metal: "white",    width: 12, finish: "matte",  tex: [],              mm: "1.5mm",
+    desc: "얇은 폭에 새틴 무광. 있는 듯 없는 듯한 미니멀의 극치.",
+    fit: "반지 착용감이 어색한 사람의 입문용으로 최고.",
+    care: "얇은 무광은 기스 티가 거의 안 남." },
+  { id: "rosedome",   name: "로즈 클래식 돔",      metal: "rose",     width: 22, finish: "polish", tex: [],              mm: "3.0mm",
+    desc: "클래식 돔의 로즈골드 버전. 피부 톤을 화사하게.",
+    fit: "웜톤 피부에 특히 잘 어울림. 부드러운 인상.",
+    care: "로즈골드는 구리 함량이 높아 변색에 오히려 강한 편." },
+  { id: "blackgold",  name: "블랙 & 골드",         metal: "black",    metal2: "yellow", width: 26, finish: "matte",  tex: ["twotone"], mm: "4.0mm",
+    desc: "블랙 밴드 안쪽에 골드 라인 — 숨겨진 반전 포인트.",
+    fit: "겉은 시크하게, 안쪽 의미는 둘만 알게. 이니셜 각인과 조합 추천.",
+    care: "블랙 면은 재도금 주기(2~3년)가 있음. 골드 라인은 통금속." },
+  { id: "slimtwist",  name: "슬림 트위스트",       metal: "rose",     width: 14, finish: "polish", tex: ["twist"],       mm: "1.8mm",
+    desc: "가느다란 꽈배기 링. 여리여리한 손에 잘 어울리는 스테디셀러.",
+    fit: "슬림+디테일 둘 다 포기 못 할 때. 스태킹용으로도 좋음.",
+    care: "얇은 트위스트는 변형에 주의 — 수면·운동 시 빼기 권장." },
+  { id: "titanbrush", name: "티타늄 헤어라인",     metal: "titanium", width: 26, finish: "matte",  tex: ["hairline"],    mm: "4.0mm",
+    desc: "초경량 티타늄에 헤어라인 마감. 공학적인 담백함.",
+    fit: "금속 알러지가 있거나 반지 무게가 싫은 사람에게 최선.",
+    care: "가볍고 변색 없음. 단, 경도가 높아 사이즈 수선이 어려움." },
+  { id: "vintagepave", name: "빈티지 밀그레인 파베", metal: "white",  width: 22, finish: "polish", tex: ["milgrain", "pave"], mm: "3.0mm",
+    desc: "밀그레인 테두리 + 하프 파베 — 앤티크 주얼리의 문법.",
+    fit: "할머니의 반지 같은 세월감 있는 화려함을 원할 때.",
+    care: "세공+스톤 조합이라 1년 1회 점검 권장. 그만큼 완성도가 높음." },
+  { id: "groove2",    name: "더블 그루브",         metal: "platinum", width: 26, finish: "polish", tex: ["groove2"],     mm: "4.0mm",
+    desc: "두 줄 홈이 트랙처럼 도는 스포티 모던 밴드.",
+    fit: "직선적이고 그래픽한 디자인 취향. 남성 인기 상위권.",
+    care: "홈 두 줄만 가끔 세척하면 관리 끝." },
+];
+
+const FINISH_LABEL = { polish: "유광", matte: "무광" };
+
+function metaLine(d) {
+  let s = METALS[d.metal].label;
+  if (d.metal2) s += " + " + METALS[d.metal2].label;
+  return s + " · " + FINISH_LABEL[d.finish] + (d.mm ? " · " + d.mm : "");
+}
+function factsHTML(d) {
+  return '<div class="ring-facts">' +
+    '<div><b>어울림</b><span>' + d.fit + '</span></div>' +
+    '<div><b>관리</b><span>' + d.care + '</span></div>' +
+  '</div>';
+}
+
+/* ---------------- persistence: hall of fame ---------------- */
+
+const STORE_KEY = "wbwc_runs_v1";
+let runs = (() => {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY) || "[]"); } catch (e) { return []; }
+})();
+function saveRuns() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(runs)); } catch (e) { /* 샌드박스면 세션 메모리로만 유지 */ }
+}
+function recordRun(champ) {
+  runs.push({
+    size: allPicks.length + 1,
+    date: new Date().toISOString().slice(0, 10),
+    top4: [
+      { id: champ.id, rank: "우승" },
+      { id: runnerUp.id, rank: "준우승" },
+      ...semifinalists.map(d => ({ id: d.id, rank: "4강" })),
+    ],
+  });
+  saveRuns();
+}
+const runs32 = () => runs.filter(r => r.size === 32).length;
+
+/* ---------------- tournament state ---------------- */
+
+const app = document.getElementById("app");
+let pool = [], nextPool = [], matchIdx = 0, allPicks = [], semifinalists = [], runnerUp = null;
+
+function shuffle(a) {
+  const arr = a.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function roundName(n) {
+  return n === 32 ? "32강" : n === 16 ? "16강" : n === 8 ? "8강" : n === 4 ? "준결승" : "결승";
+}
+
+/* ---------------- screens ---------------- */
+
+function renderIntro() {
+  document.onkeydown = null;
+  app.innerHTML =
+    '<div class="fade-in">' +
+      '<p class="eyebrow">Wedding Band Worldcup</p>' +
+      '<p class="greeting serif">이설님, 안녕하세요 💍</p>' +
+      '<h1>웨딩밴드 이상형 월드컵</h1>' +
+      '<p class="lede">커스텀 웨딩밴드에서 실제로 쓰이는 32가지 디자인을 모았어요.<br>' +
+      '매 판의 우승·준우승·4강은 <b>명예의 전당</b>에 저장됩니다 — 32강을 2회차까지 돌려 대진운을 걸러내 보세요.</p>' +
+      '<div class="btn-row" style="margin-bottom:34px">' +
+        '<button class="btn" id="start32">32강 ' + (runs32() >= 2 ? "다시 " : (runs32() + 1) + "회차 ") + '시작</button>' +
+        '<button class="btn ghost" id="start16">가볍게 16강 (랜덤 16종)</button>' +
+        '<button class="btn ghost" id="gobuild">바로 조합 만들기</button>' +
+        (runs.length ? '<button class="btn ghost" id="hall">명예의 전당 (' + runs.length + '판)</button>' : '') +
+      '</div>' +
+      '<div class="preview-grid">' +
+        DESIGNS.map(d => '<figure>' + ringSVG(d, 80) + '<figcaption>' + d.name + '</figcaption></figure>').join('') +
+      '</div>' +
+    '</div>';
+  document.getElementById("start16").addEventListener("click", () => startGame(16));
+  document.getElementById("start32").addEventListener("click", () => startGame(32));
+  document.getElementById("gobuild").addEventListener("click", () => renderBuilder(null, "intro"));
+  const hallBtn = document.getElementById("hall");
+  if (hallBtn) hallBtn.addEventListener("click", renderHall);
+}
+
+function startGame(n) {
+  pool = shuffle(DESIGNS).slice(0, n);
+  nextPool = []; matchIdx = 0; allPicks = []; semifinalists = []; runnerUp = null;
+  renderMatch();
+}
+
+function renderMatch() {
+  const a = pool[matchIdx * 2], b = pool[matchIdx * 2 + 1];
+  const total = pool.length / 2;
+  const done = matchIdx;
+  app.innerHTML =
+    '<div class="fade-in">' +
+      '<div class="round-head">' +
+        '<div class="round-title serif">' + roundName(pool.length) + '</div>' +
+        '<div class="round-sub">' + (done + 1) + ' / ' + total + ' 경기</div>' +
+      '</div>' +
+      '<div class="progress"><i style="width:' + (done / total * 100) + '%"></i></div>' +
+      '<div class="arena">' +
+        cardHTML(a, "A") + '<div class="vs serif">vs</div>' + cardHTML(b, "B") +
+      '</div>' +
+      '<p class="hint">더 마음에 드는 반지를 클릭하세요 · 키보드 ← → 로도 선택 가능</p>' +
+    '</div>';
+  const cardA = document.getElementById("card-A"), cardB = document.getElementById("card-B");
+  cardA.addEventListener("click", () => pick(a, b, cardA, cardB));
+  cardB.addEventListener("click", () => pick(b, a, cardB, cardA));
+  document.onkeydown = (e) => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); cardA.click(); }
+    if (e.key === "ArrowRight") { e.preventDefault(); cardB.click(); }
+  };
+}
+
+function cardHTML(d, side) {
+  return '<div class="ring-card" id="card-' + side + '" role="button" tabindex="0" aria-label="' + d.name + ' 선택">' +
+    ringSVG(d, 210) +
+    '<div class="ring-name">' + d.name + '</div>' +
+    '<div class="ring-meta">' + metaLine(d) + '</div>' +
+    '<div class="ring-desc">' + d.desc + '</div>' +
+    factsHTML(d) +
+  '</div>';
+}
+
+let locking = false;
+function pick(winner, loser, winEl, loseEl) {
+  if (locking) return;
+  locking = true;
+  document.onkeydown = null;
+  winEl.classList.add("picked");
+  loseEl.classList.add("dimmed");
+  allPicks.push(winner);
+  if (pool.length === 4) semifinalists.push(loser);
+  if (pool.length === 2) runnerUp = loser;
+  nextPool.push(winner);
+  setTimeout(() => {
+    locking = false;
+    matchIdx++;
+    if (matchIdx * 2 >= pool.length) {
+      pool = nextPool; nextPool = []; matchIdx = 0;
+      if (pool.length === 1) { recordRun(pool[0]); return renderResult(pool[0]); }
+    }
+    renderMatch();
+  }, 550);
+}
+
+/* ---------------- taste analysis ---------------- */
+
+const STONE_TEX = ["pave", "pavefull", "channel", "solitaire", "sapphire"];
+const EDGE_TEX = ["milgrain", "coinedge"];
+const CENTER_TEX = ["pave", "pavefull", "channel", "solitaire", "sapphire", "groove", "groove2", "wave", "leaf", "star", "knife", "mokume", "twist", "hammered", "stardust", "facet", "hairline"];
+
+function analyse() {
+  const n = allPicks.length;
+  let gold = 0, silver = 0, matte = 0, dia = 0, textured = 0, bold = 0;
+  for (const d of allPicks) {
+    if (d.metal === "yellow" || d.metal === "rose") gold++;
+    else if (d.metal !== "black") silver++;
+    if (d.finish === "matte") matte++;
+    if (d.tex.some(t => STONE_TEX.includes(t))) dia++;
+    if (d.tex.length > 0 && !d.tex.every(t => STONE_TEX.includes(t))) textured++;
+    if (d.width >= 24) bold++;
+  }
+  const pct = (v) => Math.round(v / n * 100);
+  return [
+    { lbl: "골드 계열 선호", v: pct(gold) },
+    { lbl: "실버·백금 계열", v: pct(silver) },
+    { lbl: "무광 마감 선호", v: pct(matte) },
+    { lbl: "스톤 세팅 선호", v: pct(dia) },
+    { lbl: "텍스처·패턴 선호", v: pct(textured) },
+    { lbl: "두꺼운 밴드(3.5mm+)", v: pct(bold) },
+  ];
+}
+
+function tasteNote(champ) {
+  const a = analyse();
+  const bits = [];
+  bits.push("우승한 <b>" + champ.name + "</b>(" + metaLine(champ) + ") 기준으로,");
+  bits.push(a[0].v >= 55 ? "따뜻한 골드 톤을" : a[0].v <= 35 ? "차가운 화이트 톤을" : "골드·화이트 어느 쪽도 열려 있게");
+  bits.push(a[2].v >= 40 ? "무광 위주로," : "유광 위주로,");
+  bits.push(a[3].v >= 30 ? "스톤 세팅을 포함해" : "스톤 없이 담백하게");
+  bits.push(a[5].v >= 50 ? "폭은 3.5mm 이상의 볼드한 쪽으로 잡는 걸 추천해요." : "폭은 3mm 안팎의 표준 두께를 추천해요.");
+  bits.push("공방 상담 때 이 화면을 그대로 보여주면 견적이 빨라집니다.");
+  return bits.join(" ");
+}
+
+/* ---------------- combo recommendation ---------------- */
+
+function mmOf(width) {
+  const map = { 12: "1.5mm", 14: "1.8mm", 20: "2.5mm", 22: "3.0mm", 24: "3.5mm", 26: "4.0mm", 32: "5.5mm" };
+  return map[width] || (width / 6.5).toFixed(1) + "mm";
+}
+
+function mergeTex(base, extra) {
+  // keep at most 1 center detail + 1 edge detail + structural layers
+  const out = [];
+  const all = [...base, ...extra];
+  const center = all.find(t => CENTER_TEX.includes(t));
+  const edge = all.find(t => EDGE_TEX.includes(t));
+  const struct = all.filter(t => ["twotone", "trinity", "brushcenter"].includes(t));
+  if (center) out.push(center);
+  if (edge) out.push(edge);
+  if (struct.length) out.push(struct[0]);
+  return [...new Set(out)];
+}
+
+function texLabel(tex) {
+  const L = {
+    milgrain: "밀그레인", coinedge: "코인 엣지", twist: "트위스트", pave: "하프 파베", pavefull: "풀 파베",
+    channel: "채널 세팅", solitaire: "원 포인트 다이아", sapphire: "사파이어 포인트", groove: "센터 그루브",
+    groove2: "더블 그루브", wave: "웨이브", leaf: "보태니컬 각인", star: "스타 각인", knife: "나이프 엣지",
+    mokume: "모쿠메 결", hammered: "해머드", stardust: "스타더스트", facet: "다이아컷 패싯",
+    hairline: "헤어라인", twotone: "투톤 콤비", trinity: "쓰리톤", brushcenter: "브러시드 센터",
+  };
+  return tex.length ? tex.map(t => L[t] || t).join(" + ") : "민자(세공 없음)";
+}
+
+function buildCombos(champ, second, semis) {
+  const combos = [];
+  const sameKey = (c) => c.metal + "|" + (c.metal2 || "") + "|" + c.finish + "|" + c.width + "|" + [...c.tex].sort().join(",");
+  const existing = new Set(DESIGNS.map(sameKey));
+  const push = (c, tag, why) => {
+    if (existing.has(sameKey(c))) return;
+    existing.add(sameKey(c));
+    combos.push({ ...c, tag, why });
+  };
+
+  // 1) champion base + runner-up's details
+  push({
+    name: champ.name + " × " + second.name,
+    metal: champ.metal, metal2: champ.metal2 || second.metal2,
+    width: champ.width, finish: champ.finish,
+    tex: mergeTex(champ.tex, second.tex),
+  }, "1위 + 2위 하이브리드", "우승작의 " + METALS[champ.metal].label + " 바탕에 준우승 " + second.name + "의 디테일(" + texLabel(second.tex) + ")을 얹었어요.");
+
+  // 2) runner-up metal swap on champion's design
+  if (second.metal !== champ.metal) {
+    push({
+      name: champ.name + " — " + METALS[second.metal].label + " 버전",
+      metal: second.metal, metal2: champ.metal2,
+      width: champ.width, finish: second.finish,
+      tex: champ.tex,
+    }, "메탈 스왑", "우승 디자인 그대로, 금속과 마감만 준우승작(" + METALS[second.metal].label + " · " + FINISH_LABEL[second.finish] + ")으로 바꿨어요.");
+  }
+
+  // 3) semifinalist detail graft — if the champion's center detail blocks the
+  // merge, flip priority so the semifinalist's detail leads on the champion's metal
+  for (const s of semis) {
+    if (combos.length >= 3) break;
+    if (!s.tex.length) continue;
+    let merged = mergeTex(champ.tex, s.tex);
+    if (merged.join() === mergeTex(champ.tex, []).join()) merged = mergeTex(s.tex, champ.tex);
+    if (merged.join() === mergeTex(champ.tex, []).join()) continue;
+    const added = merged.filter(t => !champ.tex.includes(t));
+    push({
+      name: champ.name + " + " + texLabel(added.length ? added.slice(0, 1) : merged.slice(0, 1)),
+      metal: champ.metal, metal2: champ.metal2 || s.metal2,
+      width: Math.max(champ.width, s.width), finish: champ.finish,
+      tex: merged,
+    }, "4강 디테일 접목", "4강에 든 " + s.name + "의 포인트를 우승작 베이스에 더한 조합이에요.");
+  }
+
+  // 4) stats-driven fallback
+  if (combos.length < 3) {
+    const a = analyse();
+    const texCount = {};
+    for (const d of allPicks) for (const t of d.tex) texCount[t] = (texCount[t] || 0) + 1;
+    const topTex = Object.entries(texCount).sort((x, y) => y[1] - x[1]).map(e => e[0]);
+    push({
+      name: "데이터 픽",
+      metal: a[0].v >= 50 ? (champ.metal === "rose" || second.metal === "rose" ? "rose" : "yellow") : "platinum",
+      width: a[5].v >= 50 ? 26 : 22,
+      finish: a[2].v >= 40 ? "matte" : "polish",
+      tex: mergeTex(topTex.slice(0, 1), topTex.slice(1, 3)),
+    }, "선택 데이터 기반", "전체 " + allPicks.length + "번의 선택에서 가장 자주 고른 금속·마감·세공을 모은 조합이에요.");
+  }
+  return combos.slice(0, 3);
+}
+
+function comboCard(c, i) {
+  return '<div class="combo">' +
+    '<p class="tag">' + c.tag + '</p>' +
+    ringSVG(c, 170) +
+    '<div class="nm">' + c.name + '</div>' +
+    '<div class="spec">' +
+      '<div><b>금속</b><span>' + METALS[c.metal].label + (c.metal2 ? " + " + METALS[c.metal2].label : "") + '</span></div>' +
+      '<div><b>폭</b><span>' + mmOf(c.width) + '</span></div>' +
+      '<div><b>마감</b><span>' + FINISH_LABEL[c.finish] + '</span></div>' +
+      '<div><b>세공</b><span>' + texLabel(c.tex) + '</span></div>' +
+    '</div>' +
+    '<div class="why">' + c.why + '</div>' +
+    '<button class="btn ghost sm" style="margin-top:10px" data-edit="' + i + '">이 조합 편집하기</button>' +
+  '</div>';
+}
+
+/* ---------------- result ---------------- */
+
+let lastCombos = [];
+
+function renderResult(champ) {
+  document.onkeydown = null;
+  const a = analyse();
+  lastCombos = buildCombos(champ, runnerUp, semifinalists);
+  app.innerHTML =
+    '<div class="fade-in">' +
+      '<div class="champion">' +
+        '<p class="laurel">Winner</p>' +
+        ringSVG(champ, 280) +
+        '<div class="ring-name serif">' + champ.name + '</div>' +
+        '<div class="ring-meta">' + metaLine(champ) + '</div>' +
+        '<p class="ring-desc">' + champ.desc + '</p>' +
+        factsHTML(champ) +
+      '</div>' +
+      '<div class="podium">' +
+        '<div class="slot"><p class="rank">2nd</p>' + ringSVG(runnerUp, 96) + '<div class="nm">' + runnerUp.name + '</div></div>' +
+        semifinalists.map(d => '<div class="slot"><p class="rank">Semifinal</p>' + ringSVG(d, 96) + '<div class="nm">' + d.name + '</div></div>').join('') +
+      '</div>' +
+      '<p class="section-sub center">이번 판(' + runs.length + '회차)의 우승·준우승·4강은 명예의 전당에 저장됐어요.' +
+        (runs32() < 2 ? ' 대진운을 걸러내려면 32강을 ' + (runs32() === 0 ? '한 번' : '한 번 더') + ' 돌려 2회차 기록까지 모아보세요.' : ' 32강 2회차 기록이 모두 모였습니다 — 명예의 전당에서 종합 랭킹을 확인하세요.') + '</p>' +
+      '<h2 class="section-title serif">추천 커스텀 조합</h2>' +
+      '<p class="section-sub">토너먼트 상위 디자인들의 금속·세공을 교차 조합해 만들었어요. 마음에 들면 바로 편집해 보세요.</p>' +
+      '<div class="combo-grid">' + lastCombos.map((c, i) => comboCard(c, i)).join('') + '</div>' +
+      '<div class="taste">' +
+        '<h2>취향 분석 — 전체 ' + allPicks.length + '번의 선택 기준</h2>' +
+        a.map(row =>
+          '<div class="bar-row"><span class="lbl">' + row.lbl + '</span>' +
+          '<span class="bar"><i style="width:' + row.v + '%"></i></span>' +
+          '<span class="val">' + row.v + '%</span></div>'
+        ).join('') +
+        '<p class="note">' + tasteNote(champ) + '</p>' +
+      '</div>' +
+      '<p class="center btn-row">' +
+        '<button class="btn" id="build">나만의 조합 만들기</button>' +
+        (runs32() < 2 ? '<button class="btn ghost" id="again32">32강 ' + (runs32() + 1) + '회차 시작</button>' : '') +
+        '<button class="btn ghost" id="hall2">명예의 전당 (' + runs.length + '판)</button>' +
+        '<button class="btn ghost" id="home">처음으로</button>' +
+      '</p>' +
+    '</div>';
+  const again32 = document.getElementById("again32");
+  if (again32) again32.addEventListener("click", () => startGame(32));
+  document.getElementById("hall2").addEventListener("click", renderHall);
+  document.getElementById("home").addEventListener("click", renderIntro);
+  document.getElementById("build").addEventListener("click", () => renderBuilder(champ, "result"));
+  app.querySelectorAll("[data-edit]").forEach(btn =>
+    btn.addEventListener("click", () => renderBuilder(lastCombos[+btn.dataset.edit], "result")));
+  window.scrollTo({ top: 0 });
+}
+
+/* ---------------- hall of fame ---------------- */
+
+function renderHall() {
+  document.onkeydown = null;
+  const byId = Object.fromEntries(DESIGNS.map(d => [d.id, d]));
+  const PTS = { "우승": 3, "준우승": 2, "4강": 1 };
+  const agg = {};
+  runs.forEach(r => r.top4.forEach(t => {
+    if (!byId[t.id]) return;
+    if (!agg[t.id]) agg[t.id] = { d: byId[t.id], pts: 0, cnt: 0, best: "4강" };
+    agg[t.id].pts += PTS[t.rank];
+    agg[t.id].cnt += 1;
+    if (PTS[t.rank] > PTS[agg[t.id].best]) agg[t.id].best = t.rank;
+  }));
+  const ranking = Object.values(agg).sort((a, b) => b.pts - a.pts || b.cnt - a.cnt);
+
+  app.innerHTML =
+    '<div class="fade-in">' +
+      '<div class="topbar">' +
+        '<button class="back" id="back">← 처음으로</button>' +
+        '<span class="eyebrow" style="margin:0">Hall of Fame</span>' +
+      '</div>' +
+      '<h1 style="font-size:clamp(24px,4vw,34px)">명예의 전당</h1>' +
+      '<p class="lede">지금까지 ' + runs.length + '판에서 4강 이상에 오른 디자인 모음이에요.<br>공방 상담 때 이 화면을 캡처해서 보여주면 취향 전달 끝.</p>' +
+      '<h2 class="section-title serif">종합 랭킹</h2>' +
+      '<p class="section-sub">우승 3점 · 준우승 2점 · 4강 1점 합산. 여러 판에서 살아남은 디자인일수록 진짜 취향입니다.</p>' +
+      '<div class="podium">' +
+        ranking.map(x =>
+          '<div class="slot"><p class="rank">' + x.best + (x.cnt > 1 ? ' · ' + x.cnt + '회 진출' : '') + '</p>' +
+          ringSVG(x.d, 96) +
+          '<div class="nm">' + x.d.name + '</div>' +
+          '<div style="font-size:11px;color:var(--sub)">' + metaLine(x.d) + '</div></div>').join('') +
+      '</div>' +
+      runs.map((r, i) =>
+        '<h2 class="section-title serif" style="font-size:16px">' + (i + 1) + '회차 — ' + r.size + '강 · ' + r.date + '</h2>' +
+        '<div class="podium">' +
+          r.top4.map(t => byId[t.id] ?
+            '<div class="slot"><p class="rank">' + t.rank + '</p>' + ringSVG(byId[t.id], 80) +
+            '<div class="nm">' + byId[t.id].name + '</div></div>' : '').join('') +
+        '</div>').join('') +
+      '<p class="center btn-row" style="margin-top:26px">' +
+        '<button class="btn" id="home2">처음으로</button>' +
+        '<button class="btn ghost" id="clear">기록 전체 삭제</button>' +
+      '</p>' +
+    '</div>';
+  document.getElementById("back").addEventListener("click", renderIntro);
+  document.getElementById("home2").addEventListener("click", renderIntro);
+  document.getElementById("clear").addEventListener("click", () => {
+    if (window.confirm && !confirm("명예의 전당 기록을 모두 삭제할까요?")) return;
+    runs = []; saveRuns(); renderIntro();
+  });
+  window.scrollTo({ top: 0 });
+}
+
+/* ---------------- custom builder ---------------- */
+
+const B_CENTER = [
+  ["", "없음"], ["pave", "하프 파베 다이아"], ["pavefull", "풀 파베 다이아"], ["channel", "채널 세팅"],
+  ["solitaire", "원 포인트 다이아"], ["sapphire", "사파이어 포인트"], ["groove", "센터 그루브"],
+  ["groove2", "더블 그루브"], ["wave", "웨이브 라인"], ["twist", "트위스트"], ["leaf", "보태니컬 각인"],
+  ["star", "스타 각인"], ["knife", "나이프 엣지"], ["mokume", "모쿠메 결"], ["hammered", "해머드"],
+  ["stardust", "스타더스트"], ["facet", "다이아컷 패싯"], ["hairline", "헤어라인"],
+];
+const B_EDGE = [["", "없음"], ["milgrain", "밀그레인"], ["coinedge", "코인 엣지"]];
+const B_STRUCT = [["", "없음"], ["twotone", "투톤 콤비"], ["trinity", "쓰리톤(트리니티)"], ["brushcenter", "브러시드 센터"]];
+
+let builderState = null;
+let builderReturn = "intro";
+
+function renderBuilder(seed, from) {
+  document.onkeydown = null;
+  builderReturn = from || "intro";
+  builderState = seed ? {
+    metal: seed.metal, metal2: seed.metal2 || "yellow",
+    width: seed.width, finish: seed.finish,
+    center: (seed.tex || []).find(t => CENTER_TEX.includes(t)) || "",
+    edge: (seed.tex || []).find(t => EDGE_TEX.includes(t)) || "",
+    struct: (seed.tex || []).find(t => ["twotone", "trinity", "brushcenter"].includes(t)) || "",
+  } : { metal: "yellow", metal2: "white", width: 22, finish: "polish", center: "", edge: "", struct: "" };
+
+  const sel = (id, label, options, value) =>
+    '<div class="field"><label for="' + id + '">' + label + '</label>' +
+    '<select id="' + id + '">' + options.map(o =>
+      '<option value="' + o[0] + '"' + (o[0] === value ? " selected" : "") + '>' + o[1] + '</option>').join('') +
+    '</select></div>';
+
+  app.innerHTML =
+    '<div class="fade-in">' +
+      '<div class="topbar">' +
+        '<button class="back" id="back">← 돌아가기</button>' +
+        '<span class="eyebrow" style="margin:0">Custom Builder</span>' +
+      '</div>' +
+      '<h1 style="font-size:clamp(24px,4vw,34px)">나만의 조합 만들기</h1>' +
+      '<p class="lede">금속·폭·마감·세공을 조합하면 실시간으로 반지가 그려집니다.</p>' +
+      '<div class="builder">' +
+        '<div class="builder-preview">' +
+          '<div id="bPreview"></div>' +
+          '<div class="builder-name" id="bName"></div>' +
+          '<div class="builder-spec" id="bSpec"></div>' +
+        '</div>' +
+        '<div>' +
+          sel("bMetal", "금속", Object.entries(METALS).map(([k, v]) => [k, v.label]), builderState.metal) +
+          '<div id="bMetal2Wrap">' +
+            sel("bMetal2", "보조 금속 (투톤용)", Object.entries(METALS).map(([k, v]) => [k, v.label]), builderState.metal2) +
+          '</div>' +
+          '<div class="field"><label for="bWidth">폭 <span class="range-val" id="bWidthVal"></span></label>' +
+            '<input type="range" id="bWidth" min="12" max="32" step="2" value="' + builderState.width + '"></div>' +
+          sel("bFinish", "마감", [["polish", "유광"], ["matte", "무광"]], builderState.finish) +
+          sel("bStruct", "구조 레이어", B_STRUCT, builderState.struct) +
+          sel("bCenter", "센터 디테일", B_CENTER, builderState.center) +
+          sel("bEdge", "엣지 디테일", B_EDGE, builderState.edge) +
+          '<div class="order-note" id="bNote"></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  document.getElementById("back").addEventListener("click", () => {
+    if (builderReturn === "result" && allPicks.length) renderResult(allPicks[allPicks.length - 1]);
+    else renderIntro();
+  });
+  ["bMetal", "bMetal2", "bFinish", "bStruct", "bCenter", "bEdge"].forEach(id =>
+    document.getElementById(id).addEventListener("change", updateBuilder));
+  document.getElementById("bWidth").addEventListener("input", updateBuilder);
+  updateBuilder();
+  window.scrollTo({ top: 0 });
+}
+
+function updateBuilder() {
+  const g = (id) => document.getElementById(id).value;
+  builderState = {
+    metal: g("bMetal"), metal2: g("bMetal2"),
+    width: +g("bWidth"), finish: g("bFinish"),
+    center: g("bCenter"), edge: g("bEdge"), struct: g("bStruct"),
+  };
+  document.getElementById("bMetal2Wrap").style.display = builderState.struct === "twotone" ? "" : "none";
+  const tex = [builderState.center, builderState.edge, builderState.struct].filter(Boolean);
+  const d = {
+    name: "커스텀", metal: builderState.metal,
+    metal2: builderState.struct === "twotone" ? builderState.metal2 : undefined,
+    width: builderState.width, finish: builderState.finish, tex,
+  };
+  document.getElementById("bWidthVal").textContent = mmOf(builderState.width);
+  document.getElementById("bPreview").innerHTML = ringSVG(d, 280);
+  const specText = METALS[d.metal].label + (d.metal2 ? " + " + METALS[d.metal2].label : "") +
+    " · " + mmOf(d.width) + " · " + FINISH_LABEL[d.finish] + " · " + texLabel(tex);
+  document.getElementById("bName").textContent = texLabel(tex) === "민자(세공 없음)" ? "심플 밴드" : texLabel(tex) + " 밴드";
+  document.getElementById("bSpec").textContent = specText;
+  document.getElementById("bNote").innerHTML =
+    "<b>공방 주문 멘트</b> — “" + specText + "으로 견적 부탁드려요.” " +
+    "이 문장 그대로 보여주면 어느 공방에서든 바로 알아듣습니다.";
+}
+
+renderIntro();
+</script>
+
+</body>
+</html>
